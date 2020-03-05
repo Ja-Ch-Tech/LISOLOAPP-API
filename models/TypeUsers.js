@@ -4,6 +4,11 @@ const db = admin.firestore();
 const collection = db.collection("TypeUser");
 
 module.exports = {
+    /**
+     * Le module de la création de nouveau type d'utilisateur
+     * @param {Object} newType Le nouveau type d'utilisateur
+     * @param {Function} callback La fonction de retour
+     */
     create(newType, callback) {
         try {
             collection.add(newType)
@@ -18,6 +23,11 @@ module.exports = {
             callback(false, "Une exception a été lévée lors de l'enregistrement d'un nouveau type d'utilisateur : " + exception)
         }
     },
+
+    /**
+     * Le module de récupération de tous les types utilisateurs
+     * @param {Function} callback La fonction de retour 
+     */
     getAll(callback) {
         try {
             let types = [];
@@ -36,6 +46,12 @@ module.exports = {
             callback(false, "Une exception a été lévée lors de la récupération de tous les types : " + exception)
         }
     },
+
+    /**
+     * Le module de récupération d'un type users suivant son UID
+     * @param {String} id L'identifiant du type users
+     * @param {Function} callback La fonction de retour
+     */
     findOneById(id, callback) {
         try {
             collection.doc(id).get()
